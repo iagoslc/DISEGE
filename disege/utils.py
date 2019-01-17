@@ -27,7 +27,7 @@ def grid_data(x,y,z,area = None,cel = 50,method = 'cubic'):
         area = (x.min(),x.max(),y.min(),y.max())
     
     numcols, numrows = int((area[1] - area[0])/cel), int((area[3] - area[2])/cel)
-    print(numcols,numrows)
+    print('The Grid has %i cols x %i rows' % (numcols,numrows))
     x_y = np.c_[x.ravel(),y.ravel()]
     xi = np.linspace(area[0], area[1], numcols)
     yi = np.linspace(area[3], area[2], numrows)
@@ -53,12 +53,12 @@ def syn_data(inc, dec,syn_bounds,area,depth=-300,magnetization = 5,cel=200):
     return x,y,mag,model
 
 
-def syn_plot(xi,yi,z,area,syn_bounds,model,label,cel=10):
+def syn_plot(xi,yi,z,area,syn_bounds,model,label,clabel):
     #
     #Plotting synthetic data from xi,yi,z obtained from grid_data
-    print(label)
-    print(area)
-    print(syn_bounds)
+    #print(label)
+    #print(area)
+    #print(syn_bounds)
     fig = plt.figure(figsize=(20, 8))
     ax1 = fig.add_subplot('121')
 
@@ -71,7 +71,7 @@ def syn_plot(xi,yi,z,area,syn_bounds,model,label,cel=10):
     pcm = plt.contourf(xi, yi, z,50,vmin=z.min(), vmax=z.max(),cmap=plt.cm.rainbow,)
     #if you want to normalize in log > e.g. norm=colors.SymLogNorm(linthresh=0.03, linscale=0.03,vmin=z.min(), vmax=z.max())
     cbar = plt.colorbar(pcm,orientation='horizontal',fraction=0.046, pad=0.1)
-    cbar.set_label('nT',fontsize = 12)
+    cbar.set_label(clabel,fontsize = 12)
     ax1.set_xlabel('x (m)',fontsize = 12)
     ax1.set_ylabel('y (m)',fontsize = 12)
     ax1.set_title(label,fontsize = 16,style='italic')
