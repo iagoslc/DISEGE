@@ -33,13 +33,13 @@ def main():
     utils.save_data(x,y,mag,fname = 'mag_disege_pole.xyz')
     
     #Processing data - Optionally
-    asa = processing.asa_mag(x,y,mag,area)
+    asa = processing.gdo_mag(x,y,mag,area,theta=0,phi=45)
     
     # Grid data
     xi,yi,z = utils.grid_data(x,y,asa,area)
     
     #Plotting synthetic data
-    utils.syn_plot(xi,yi,z,area,syn_bounds,model,label='Analytic Signal (nT/m)')
+    utils.syn_plot(xi,yi,z,area,syn_bounds,model,label='Analytic Signal (nT/m)',clabel = 'teste')
     
     #Show the final plot
     plt.show()

@@ -173,7 +173,7 @@ def thd_stdr_mag(x,y,mag,area,cel=200,M=50000):
     
     return thd_stdr
     
-def asta_mag(x,y,mag,area,cel=200,M=50000):
+def asta_mag(x,y,mag,area,cel=200):
     #Analytic Signal of Tilt Angle
     #(Ansari and Alamdar, 2011)
     
@@ -196,3 +196,17 @@ def asta_mag(x,y,mag,area,cel=200,M=50000):
     return asta
 
 
+def gdo_mag(x,y,mag,area,theta,phi,cel=200):
+    #Generalised derivative operator
+    #(Cooper and Cowan 2011)
+    #Calculating the derivatives through Fatiando library
+    numcols, numrows = int((area[1] - area[0])/cel), int((area[3] - area[2])/cel)
+    deriv_x = transform.derivx(x, y, mag, (numcols, numrows))
+    deriv_y = transform.derivy(x, y, mag, (numcols, numrows))
+    deriv_z = transform.derivz(x, y, mag, (numcols, numrows))
+    
+    gdo = ((deriv_x*np.sin(theta) + deriv_y*np.cos(theta))*np.cos(phi) + deriv_z*np.sin(phi))/np.sqrt(deriv_x**2+deriv_y**2+deriv_z**2)
+    
+    return gdo
+    
+    
