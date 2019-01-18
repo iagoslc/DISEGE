@@ -211,10 +211,10 @@ def euler_deconv(inc, dec,syn_bounds,area,depth=-300,magnetization = 0.5,si=1.0,
 
 
 
-def plot_data(xi,yi,z,label=None,shaded=False):
+def plot_data(xi,yi,z,label,clabel,shaded=False):
     #
     #Plotting data from xyz file
-    fig = plt.figure(figsize=(10, 8))
+    fig = plt.figure(figsize=(14, 6))
     ax1 = fig.add_subplot('111')
     
     if shaded:
@@ -232,7 +232,7 @@ def plot_data(xi,yi,z,label=None,shaded=False):
         #pcm = plt.contourf(xi, yi, z,50,vmin=z.min(), vmax=z.max(),cmap=plt.cm.rainbow)
         pcm = plt.imshow(z,extent=[xi.min(),xi.max(),yi.min(),yi.max()],cmap=plt.cm.rainbow,vmin = -300, vmax = 300)
     cbar = plt.colorbar(pcm,orientation='horizontal',fraction=0.046, pad=0.1)    
-    cbar.set_label('nT',fontsize = 12)
+    cbar.set_label(clabel,fontsize = 12)
     ax1.set_xlabel('x (m)',fontsize = 12)
     ax1.set_ylabel('y (m)',fontsize = 12)
     ax1.set_title(label,fontsize = 16,style='italic')
